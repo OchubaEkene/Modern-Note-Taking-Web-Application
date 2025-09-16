@@ -1,17 +1,17 @@
-# 📝 Modern Note-Taking Web Application
+# Modern Note-Taking Web Application
 
 A full-featured, secure note-taking web application built with Flask, featuring user authentication, rich note management, search functionality, and a modern responsive UI.
 
-## ✨ Features
+## Features
 
-### 🔐 Security & Authentication
+### Security & Authentication
 - **Secure User Authentication** with Flask-Login
 - **CSRF Protection** to prevent cross-site request forgery
 - **Password Hashing** using Werkzeug's secure hash functions
 - **Input Validation** with WTForms
 - **Environment-based Configuration** for secure secret management
 
-### 📝 Note Management
+### Note Management
 - **Rich Note Creation** with titles, content, categories, and tags
 - **Advanced Search** with full-text search across titles and content
 - **Category Organization** (General, Work, Personal, Ideas, Learning, Projects)
@@ -20,7 +20,7 @@ A full-featured, secure note-taking web application built with Flask, featuring 
 - **CRUD Operations** - Create, Read, Update, Delete notes
 - **Responsive Design** that works on desktop and mobile
 
-### 🎨 Modern UI/UX
+### Modern UI/UX
 - **Bootstrap 4** for responsive design
 - **Card-based Layout** for clean note presentation
 - **Modal Forms** for seamless note creation
@@ -28,14 +28,14 @@ A full-featured, secure note-taking web application built with Flask, featuring 
 - **Statistics Dashboard** showing note counts and favorites
 - **Professional Styling** with hover effects and smooth transitions
 
-### 🚀 Technical Features
+### Technical Features
 - **RESTful API** endpoints for future mobile app integration
 - **Database Migrations** support
 - **Error Handling** with proper logging
 - **Form Validation** with user-friendly error messages
 - **AJAX Operations** for smooth user experience
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Backend**: Flask, SQLAlchemy, Flask-Login, Flask-WTF
 - **Frontend**: HTML5, CSS3, JavaScript, Bootstrap 4
@@ -43,7 +43,7 @@ A full-featured, secure note-taking web application built with Flask, featuring 
 - **Security**: CSRF protection, password hashing, input validation
 - **Deployment**: Ready for Docker containerization
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Python 3.7+
@@ -111,7 +111,7 @@ Note-Storing-Flask-Web-App/
     └── database.db       # SQLite database
 ```
 
-## 🔧 Configuration
+## Configuration
 
 The application uses environment variables for configuration. Create a `.env` file with:
 
@@ -122,7 +122,7 @@ FLASK_ENV=development
 FLASK_DEBUG=True
 ```
 
-## 🎯 API Endpoints
+## API Endpoints
 
 ### Authentication
 - `GET /login` - Login page
@@ -141,7 +141,7 @@ FLASK_DEBUG=True
 - `POST /toggle-favorite/<id>` - Toggle favorite status
 - `GET /api/notes` - Get all notes as JSON
 
-## 🔒 Security Features
+## Security Features
 
 - **CSRF Protection**: All forms are protected against CSRF attacks
 - **Password Security**: Passwords are hashed using PBKDF2 with SHA-256
@@ -149,7 +149,7 @@ FLASK_DEBUG=True
 - **SQL Injection Prevention**: Using SQLAlchemy ORM prevents SQL injection
 - **XSS Protection**: Template auto-escaping prevents XSS attacks
 
-## 🚀 Deployment
+## Deployment
 
 ### Docker Deployment
 ```dockerfile
@@ -170,7 +170,7 @@ FLASK_ENV=production
 FLASK_DEBUG=False
 ```
 
-## 🧪 Testing
+## Testing
 
 Run the application and test the following features:
 1. User registration and login
@@ -179,7 +179,7 @@ Run the application and test the following features:
 4. Favorites system
 5. Responsive design on different screen sizes
 
-## 🎨 Customization
+## Customization
 
 ### Adding New Categories
 Edit `website/forms.py` and add new options to the category choices.
