@@ -156,3 +156,7 @@ logs/
 # Temporary files
 *.tmp
 *.temp
+
+# Sensitive files
+cookies.txt
+*.db
