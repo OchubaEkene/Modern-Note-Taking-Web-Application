@@ -189,32 +189,3 @@ Modify the CSS in the template files or create separate CSS files in the `static
 
 ### Database
 The application is configured for SQLite by default but can easily be switched to PostgreSQL or MySQL by changing the `DATABASE_URL` in the configuration.
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## 🎯 Future Enhancements
-
-- [ ] Rich text editor integration
-- [ ] File attachment support
-- [ ] Real-time collaboration
-- [ ] Mobile app development
-- [ ] Advanced search with filters
-- [ ] Note sharing capabilities
-- [ ] Export to PDF/Markdown
-- [ ] Dark mode theme
-- [ ] API rate limiting
-- [ ] User profile management
-
----
-
-**Built with ❤️ using Flask and modern web technologies**
