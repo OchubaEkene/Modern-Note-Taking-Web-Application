@@ -1,45 +1,185 @@
-{% extends "base.html" %} {% block title %}Sign Up{% endblock %}
+{% extends "base.html" %} 
+{% block title %}Sign Up{% endblock %}
+
 {% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title text-center mb-4">Create Account</h3>
+                    
+                    <form method="post">
+                        {{ form.hidden_tag() }}
+                        
+                        <div class="form-group">
+                            {{ form.email.label(class="form-label") }}
+                            {{ form.email(class="form-control" + (" is-invalid" if form.email.errors else "")) }}
+                            {% if form.email.errors %}
+                                <div class="invalid-feedback">
+                                    {% for error in form.email.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
 
-<form method="post">
-    <h3 align="center">Sign Up</h3>
-    <div class="form-group">
-        <label for="email">Email Address</label>
-        <input type="email"
-         class="form-control"
-          id="email" name="email"
-           placeholder="Enter email"
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{ form.first_name.label(class="form-label") }}
+                                    {{ form.first_name(class="form-control" + (" is-invalid" if form.first_name.errors else "")) }}
+                                    {% if form.first_name.errors %}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.first_name.errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{ form.last_name.label(class="form-label") }}
+                                    {{ form.last_name(class="form-control" + (" is-invalid" if form.last_name.errors else "")) }}
+                                    {% if form.last_name.errors %}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.last_name.errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.password.label(class="form-label") }}
+                            <div class="input-group">
+                                {{ form.password(class="form-control" + (" is-invalid" if form.password.errors else ""), id="password1") }}
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button" id="togglePassword1">
+                                        <i class="fa fa-eye" id="toggleIcon1"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            {% if form.password.errors %}
+                                <div class="invalid-feedback">
+                                    {% for error in form.password.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                            <small class="form-text text-muted">Password must be at least 8 characters long.</small>
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.confirm_password.label(class="form-label") }}
+                            <div class="input-group">
+                                {{ form.confirm_password(class="form-control" + (" is-invalid" if form.confirm_password.errors else ""), id="password2") }}
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button" id="togglePassword2">
+                                        <i class="fa fa-eye" id="toggleIcon2"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            {% if form.confirm_password.errors %}
+                                <div class="invalid-feedback">
+                                    {% for error in form.confirm_password.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">Create Account</button>
+                        </div>
+                    </form>
+                    
+                    <div class="text-center mt-3">
+                        <p class="mb-0">Already have an account? 
+                            <a href="{{ url_for('auth.login') }}" class="text-decoration-none">Login here</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 
-    <div class="form-group">
-        <label for="firstName">First Name</label>
-        <input type="text"
-         class="form-control"
-          id="firstName" name="firstName"
-           placeholder="Enter first name"
-    </div>
+<style>
+.card {
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
 
-    <div class="form-group">
-        <label for="password1">Password</label>
-        <input type="password"
-         class="form-control"
-          id="password1" name="password1"
-           placeholder="Enter password"
-    </div>
+.card-body {
+    padding: 2rem;
+}
 
-     <div class="form-group">
-        <label for="password2">Password (Confirm)</label>
-        <input type="password"
-         class="form-control"
-          id="password2" name="password2"
-           placeholder="Confirm password"
-    </div>
+.form-label {
+    font-weight: 500;
+    color: #495057;
+}
 
-    <br/>
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    border-radius: 5px;
+}
 
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
 
+body {
+    background-color: #f8f9fa;
+}
 
+.input-group-append .btn {
+    border-left: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.input-group .form-control:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Function to toggle password visibility
+    function setupPasswordToggle(toggleId, passwordId, iconId) {
+        const toggleButton = document.getElementById(toggleId);
+        const passwordField = document.getElementById(passwordId);
+        const toggleIcon = document.getElementById(iconId);
+        
+        if (toggleButton && passwordField && toggleIcon) {
+            toggleButton.addEventListener('click', function() {
+                const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordField.setAttribute('type', type);
+                
+                // Toggle the eye icon
+                if (type === 'text') {
+                    toggleIcon.classList.remove('fa-eye');
+                    toggleIcon.classList.add('fa-eye-slash');
+                } else {
+                    toggleIcon.classList.remove('fa-eye-slash');
+                    toggleIcon.classList.add('fa-eye');
+                }
+            });
+        }
+    }
+    
+    // Setup password toggles for both password fields
+    setupPasswordToggle('togglePassword1', 'password1', 'toggleIcon1');
+    setupPasswordToggle('togglePassword2', 'password2', 'toggleIcon2');
+});
+</script>
 {% endblock %}
 

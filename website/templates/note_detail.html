@@ -1,0 +1,113 @@
+{% extends "base.html" %} 
+{% block title %}{{ note.title }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">{{ note.title }}</h4>
+                    <div class="btn-group">
+                        <a href="{{ url_for('views.edit_note', note_id=note.id) }}" 
+                           class="btn btn-outline-primary btn-sm">
+                            <i class="fa fa-edit"></i> Edit
+                        </a>
+                        <button class="btn btn-outline-danger btn-sm" onclick="deleteNote({{ note.id }})">
+                            <i class="fa fa-trash"></i> Delete
+                        </button>
+                        <a href="{{ url_for('views.home') }}" class="btn btn-outline-secondary btn-sm">
+                            <i class="fa fa-arrow-left"></i> Back
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="note-meta mb-3">
+                        <span class="badge badge-secondary">{{ note.category }}</span>
+                        {% for tag in note.get_tags() %}
+                            <span class="badge badge-light">{{ tag }}</span>
+                        {% endfor %}
+                        {% if note.is_favorite %}
+                            <span class="badge badge-warning">
+                                <i class="fa fa-star"></i> Favorite
+                            </span>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="note-content">
+                        <p style="white-space: pre-wrap; line-height: 1.6;">{{ note.content }}</p>
+                    </div>
+                    
+                    <div class="note-footer mt-4 pt-3 border-top">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <small class="text-muted">
+                                    <strong>Created:</strong> {{ note.created_at.strftime('%B %d, %Y at %I:%M %p') }}
+                                </small>
+                            </div>
+                            <div class="col-md-6 text-md-right">
+                                <small class="text-muted">
+                                    <strong>Last Updated:</strong> {{ note.updated_at.strftime('%B %d, %Y at %I:%M %p') }}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function deleteNote(noteId) {
+    if (confirm('Are you sure you want to delete this note? This action cannot be undone.')) {
+        fetch("/delete-note", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ noteId: noteId }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert('Error: ' + data.error);
+            } else {
+                window.location.href = "{{ url_for('views.home') }}";
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while deleting the note.');
+        });
+    }
+}
+</script>
+
+<style>
+.card {
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.note-content {
+    font-size: 1.1em;
+    color: #495057;
+}
+
+.note-meta .badge {
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+body {
+    background-color: #f8f9fa;
+}
+</style>
+{% endblock %}

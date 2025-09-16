@@ -1,16 +1,29 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-from os import path
+from flask_wtf.csrf import CSRFProtect
+from flask_cors import CORS
+import os
+import logging
+from config import Config
 
 db = SQLAlchemy()  # Initialize the SQLAlchemy database instance
-DB_NAME = 'database.db'  # Database file name
+csrf = CSRFProtect()  # Initialize CSRF protection
+cors = CORS()  # Initialize CORS
 
 def create_App():  # Function to create and configure the Flask application
     app = Flask(__name__) 
-    app.config['SECRET_KEY'] = 'ufuhndunvjieme veivimeicmic' # Example secret key
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'  # Database URI
+    app.config.from_object(Config)
+    
+    # Initialize extensions
     db.init_app(app)  # Initialize the database with the app
+    csrf.init_app(app)  # Initialize CSRF protection
+    cors.init_app(app)  # Initialize CORS
+    
+    # Configure logging
+    if not app.debug:
+        logging.basicConfig(level=logging.INFO)
+        logging.info('Note App startup')
 
     from .views import views # Import the views blueprint
     from .auth import auth # Import the auth blueprint
@@ -32,7 +45,7 @@ def create_App():  # Function to create and configure the Flask application
     return app
 
 def create_database(app):  # Function to create the database if it doesn't exist
-    if not path.exists('website/' + DB_NAME):  # Check if the database file
+    if not os.path.exists('instance/database.db'):  # Check if the database file
         with app.app_context():
             db.create_all()
         print('Created Database') 

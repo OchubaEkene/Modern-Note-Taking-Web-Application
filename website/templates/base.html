@@ -66,6 +66,9 @@
     </div>
 
     <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
+    
+    <!-- CSRF Token for AJAX requests -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
       <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

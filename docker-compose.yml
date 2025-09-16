@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=development
+      - SECRET_KEY=dev-secret-key-change-in-production
+      - DATABASE_URL=sqlite:///instance/database.db
+    volumes:
+      - .:/app
+      - ./instance:/app/instance
+    restart: unless-stopped
+
+  # Optional: Add PostgreSQL for production
+  # db:
+  #   image: postgres:13
+  #   environment:
+  #     POSTGRES_DB: notes_db
+  #     POSTGRES_USER: notes_user
+  #     POSTGRES_PASSWORD: notes_password
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   restart: unless-stopped
+
+# volumes:
+#   postgres_data:
